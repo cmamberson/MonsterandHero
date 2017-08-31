@@ -39,8 +39,75 @@
     ///////////////////////////
     // Put your code here!
     ///////////////////////////
+function LivingThing (name, health){
+      var name = name;
+      var health = health;
 
-    
+      this.isAlive = function(){
+        if (health > 0){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+
+      this.getName = function(){
+        return name;
+      }
+      this.getHealth = function(){
+        return health;
+      }
+
+      this.setHealth = function(newHealth){
+        health = newHealth;
+      }
+}
+
+
+
+
+function Hero(heroName, heroHealth){
+
+  LivingThing.call(this, heroName, heroHealth);
+
+
+  this.attack = function(monster){
+
+          let heroDamage = parseInt(Math.random() * 10);
+          let monsterDamage = parseInt(Math.random() * 10);
+
+          monster.setHealth(monster.getHealth() - monsterDamage);
+          this.setHealth(this.getHealth() - heroDamage);
+
+          console.log(this.getName()+" took "+heroDamage+" damage and " +monster.getName()+ " took "+monsterDamage+" damage")
+    }
+
+
+    this.fight = function(arrayOfMonsters){
+
+          for(let i = 0; i < arrayOfMonsters.length; i++){
+            while (arrayOfMonsters[i].isAlive() && this.isAlive()){
+              this.attack(arrayOfMonsters[i]);
+
+
+            }
+            }
+          }
+        }
+
+
+
+
+
+
+    let hero = new Hero("superman", 100);
+    let rat = new LivingThing("Rat", 5);
+    let goblin = new LivingThing("Goblin", 30);
+    let ogre = new LivingThing("Ogre", 80);
+    let monsters = [rat, goblin, ogre];
+
+
 
     //The code below should work when you are done
     console.log("A hero emerges!");
